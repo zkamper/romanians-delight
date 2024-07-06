@@ -8,7 +8,7 @@ import zkamper.romaniansdelight.common.ModBlockEntities;
 import zkamper.romaniansdelight.common.block.renderer.GrillRenderer;
 
 @Mod.EventBusSubscriber(
-        modid = RomaniansDelight.MODID,
+        modid = RomaniansDelight.MOD_ID,
         bus = Mod.EventBusSubscriber.Bus.MOD,
         value = {Dist.CLIENT}
 )

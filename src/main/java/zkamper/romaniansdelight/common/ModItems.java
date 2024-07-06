@@ -1,6 +1,5 @@
 package zkamper.romaniansdelight.common;
 
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -12,7 +11,7 @@ import zkamper.romaniansdelight.common.item.RawMiciItem;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
-            DeferredRegister.create(ForgeRegistries.ITEMS, RomaniansDelight.MODID);
+            DeferredRegister.create(ForgeRegistries.ITEMS, RomaniansDelight.MOD_ID);
     public static final RegistryObject<Item> RAW_MICI;
     public static final RegistryObject<Item> COOKED_MICI;
 

@@ -12,7 +12,7 @@ import zkamper.romaniansdelight.common.block.entity.GrillBlockEntity;
 
 public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
-            DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, RomaniansDelight.MODID);
+            DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, RomaniansDelight.MOD_ID);
 
     public static final RegistryObject<BlockEntityType<GrillBlockEntity>> GRILL;
 

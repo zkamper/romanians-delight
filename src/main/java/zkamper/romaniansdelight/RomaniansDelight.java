@@ -2,8 +2,6 @@ package zkamper.romaniansdelight;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -17,9 +15,9 @@ import zkamper.romaniansdelight.common.ModBlockEntities;
 import zkamper.romaniansdelight.common.ModBlocks;
 import zkamper.romaniansdelight.common.ModItems;
 
-@Mod(RomaniansDelight.MODID)
+@Mod(RomaniansDelight.MOD_ID)
 public class RomaniansDelight {
-    public static final String MODID = "romaniansdelight";
+    public static final String MOD_ID = "romaniansdelight";
     private static final Logger LOGGER = LogUtils.getLogger();
     public RomaniansDelight() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -35,7 +33,7 @@ public class RomaniansDelight {
         // No idea tbh
     }
 
-    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents
     {
         @SubscribeEvent
