@@ -9,6 +9,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import zkamper.romaniansdelight.RomaniansDelight;
 import zkamper.romaniansdelight.common.block.GrillBlock;
+import zkamper.romaniansdelight.common.block.MamaligaBlock;
 
 import java.util.function.Supplier;
 
@@ -17,9 +18,11 @@ public class ModBlocks {
         DeferredRegister.create(ForgeRegistries.BLOCKS, RomaniansDelight.MOD_ID);
 
     public static final RegistryObject<Block> GRILL_BLOCK;
+    public static final RegistryObject<Block> MAMALIGA_BLOCK;
 
     static {
         GRILL_BLOCK = registerBlock(GrillBlock.NAME,GrillBlock::new);
+        MAMALIGA_BLOCK = registerBlock(MamaligaBlock.NAME, MamaligaBlock::new);
     }
 
     public static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {

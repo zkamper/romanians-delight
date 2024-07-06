@@ -19,8 +19,8 @@ import zkamper.romaniansdelight.common.block.entity.GrillBlockEntity;
 public class GrillRenderer implements BlockEntityRenderer<GrillBlockEntity> {
     private static final float SIZE = 0.25F;
     private final ItemRenderer itemRenderer;
-    public GrillRenderer(BlockEntityRendererProvider.Context p_173602_) {
-        this.itemRenderer = p_173602_.getItemRenderer();
+    public GrillRenderer(BlockEntityRendererProvider.Context context) {
+        this.itemRenderer = context.getItemRenderer();
     }
     @Override
     public void render(GrillBlockEntity grillBlockEntity, float v, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int i1) {
