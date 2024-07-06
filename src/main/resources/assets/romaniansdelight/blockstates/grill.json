@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=south": {
+      "model": "romaniansdelight:block/grill"
+    },
+    "facing=north": {
+      "model": "romaniansdelight:block/grill",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "romaniansdelight:block/grill",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "romaniansdelight:block/grill",
+      "y": 90
+    }
+  }
+}

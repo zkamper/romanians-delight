@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "cookingtime": 400,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "romaniansdelight:raw_mici"
+  },
+  "result": "romaniansdelight:cooked_mici"
+}
