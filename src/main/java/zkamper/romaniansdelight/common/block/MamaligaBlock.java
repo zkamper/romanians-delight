@@ -23,7 +23,7 @@ public class MamaligaBlock extends FeastBlock {
     public static final IntegerProperty MAMALIGA_SERVINGS = IntegerProperty.create("servings", 0, 6);
     public static final Properties PROPERTIES = Block.Properties.copy(Blocks.CAKE);
     public MamaligaBlock() {
-        super(PROPERTIES, ModItems.COOKED_MICI, true);
+        super(PROPERTIES, ModItems.MAMALIGA, true);
     }
 
     public IntegerProperty getServingsProperty() {
