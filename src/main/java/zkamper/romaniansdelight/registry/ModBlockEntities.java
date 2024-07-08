@@ -1,4 +1,4 @@
-package zkamper.romaniansdelight.common;
+package zkamper.romaniansdelight.registry;
 
 import com.mojang.datafixers.types.Type;
 import net.minecraft.world.level.block.Block;

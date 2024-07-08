@@ -1,4 +1,4 @@
-package zkamper.romaniansdelight.common;
+package zkamper.romaniansdelight.registry;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -19,10 +19,13 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> GRILL_BLOCK;
     public static final RegistryObject<Block> MAMALIGA_BLOCK;
+    public static final RegistryObject<Item> MAMALIGA_ITEM;
 
     static {
         GRILL_BLOCK = registerBlock(GrillBlock.NAME,GrillBlock::new);
-        MAMALIGA_BLOCK = registerBlock(MamaligaBlock.NAME, MamaligaBlock::new);
+        MAMALIGA_BLOCK = BLOCKS.register(MamaligaBlock.NAME, MamaligaBlock::new);
+        MAMALIGA_ITEM = ModItems.ITEMS.register(MamaligaBlock.NAME,() ->
+                new BlockItem(MAMALIGA_BLOCK.get(), new Item.Properties().tab(ModCreativeTab.MOD_TAB).stacksTo(1)));
     }
 
     public static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {

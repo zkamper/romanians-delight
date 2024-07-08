@@ -1,4 +1,4 @@
-package zkamper.romaniansdelight.common;
+package zkamper.romaniansdelight.registry;
 
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;

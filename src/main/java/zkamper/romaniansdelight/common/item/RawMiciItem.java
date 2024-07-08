@@ -2,7 +2,7 @@ package zkamper.romaniansdelight.common.item;
 
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
-import zkamper.romaniansdelight.common.ModCreativeTab;
+import zkamper.romaniansdelight.registry.ModCreativeTab;
 
 public class RawMiciItem extends Item {
 

@@ -2,7 +2,7 @@ package zkamper.romaniansdelight.common.item;
 
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
-import zkamper.romaniansdelight.common.ModCreativeTab;
+import zkamper.romaniansdelight.registry.ModCreativeTab;
 
 public class CookedMiciItem extends Item{
     public static final String NAME = "cooked_mici";

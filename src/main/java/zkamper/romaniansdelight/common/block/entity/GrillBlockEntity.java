@@ -20,11 +20,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import vectorwing.farmersdelight.common.registry.ModSounds;
-import zkamper.romaniansdelight.common.ModBlockEntities;
+import zkamper.romaniansdelight.registry.ModBlockEntities;
 import zkamper.romaniansdelight.common.block.GrillBlock;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
 

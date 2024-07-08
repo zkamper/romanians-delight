@@ -1,7 +1,7 @@
 package zkamper.romaniansdelight.common.item;
 
 import net.minecraft.world.item.Item;
-import zkamper.romaniansdelight.common.ModCreativeTab;
+import zkamper.romaniansdelight.registry.ModCreativeTab;
 
 public class CornFlourItem extends Item {
     public static final String NAME = "corn_flour";

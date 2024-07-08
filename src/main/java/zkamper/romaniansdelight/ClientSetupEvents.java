@@ -4,7 +4,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import zkamper.romaniansdelight.common.ModBlockEntities;
+import zkamper.romaniansdelight.registry.ModBlockEntities;
 import zkamper.romaniansdelight.common.block.renderer.GrillRenderer;
 
 @Mod.EventBusSubscriber(
