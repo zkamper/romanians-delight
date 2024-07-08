@@ -1,0 +1,23 @@
+{
+  "type": "farmersdelight:cooking",
+  "cookingtime": 100,
+  "experience": 0.35,
+  "ingredients": [
+    {
+      "tag": "forge:crops/cabbage"
+    },
+    {
+      "item": "farmersdelight:onion"
+    },
+    {
+      "item": "farmersdelight:rice"
+    },
+    {
+      "tag": "forge:raw_pork"
+    }
+  ],
+  "recipe_book_tab": "misc",
+  "result": {
+    "item": "romaniansdelight:sarmale"
+  }
+}

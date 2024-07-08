@@ -1,6 +1,5 @@
 package zkamper.romaniansdelight.common.item;
 
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
@@ -10,7 +9,7 @@ import vectorwing.farmersdelight.common.item.ConsumableItem;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 import zkamper.romaniansdelight.registry.ModCreativeTab;
 
-public class StomachChorbaItem extends ConsumableItem {
+public class TripeSoupItem extends ConsumableItem {
     public static final String NAME = "tripe_soup";
     public static final FoodProperties FOOD_PROPERTIES = new FoodProperties.Builder()
             .nutrition(12)
@@ -24,7 +23,7 @@ public class StomachChorbaItem extends ConsumableItem {
             .stacksTo(16)
             .craftRemainder(Items.BOWL);
 
-    public StomachChorbaItem() {
+    public TripeSoupItem() {
         super(PROPERTIES, true);
     }
 }
