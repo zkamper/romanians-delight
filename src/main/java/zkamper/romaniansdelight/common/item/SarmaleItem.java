@@ -14,7 +14,7 @@ public class SarmaleItem extends Item {
     public static final Item.Properties PROPERTIES = new Item.Properties()
             .tab(ModCreativeTab.MOD_TAB)
             .food(FOOD_PROPERTIES)
-            .stacksTo(16);
+            .stacksTo(64);
     public SarmaleItem() {
         super(PROPERTIES);
     }
