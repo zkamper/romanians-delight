@@ -20,6 +20,9 @@ public class ModItems {
     public static final RegistryObject<Item> CORN_FLOUR;
     public static final RegistryObject<Item> MAMALIGA;
     public static final RegistryObject<Item> SARMALE;
+    public static final RegistryObject<Item> BOILED_CORN;
+    public static final RegistryObject<Item> BOILED_EGG;
+    public static final RegistryObject<Item> GARLIC;
 
     static {
         RADAUTI_CIORBA = ITEMS.register(RadautiSoupItem.NAME, RadautiSoupItem::new);
@@ -31,6 +34,9 @@ public class ModItems {
         CORN_FLOUR = ITEMS.register(CornFlourItem.NAME, CornFlourItem::new);
         MAMALIGA = ITEMS.register(MamaligaItem.NAME, MamaligaItem::new);
         SARMALE = ITEMS.register(SarmaleItem.NAME, SarmaleItem::new);
+        BOILED_CORN = ITEMS.register(BoiledCornItem.NAME, BoiledCornItem::new);
+        BOILED_EGG = ITEMS.register(BoiledEggItem.NAME, BoiledEggItem::new);
+        GARLIC = ITEMS.register(GarlicItem.NAME, GarlicItem::new);
     }
 
     public static void register(IEventBus eventBus) {

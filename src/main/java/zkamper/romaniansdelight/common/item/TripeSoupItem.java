@@ -15,7 +15,6 @@ public class TripeSoupItem extends ConsumableItem {
             .nutrition(12)
             .saturationMod(0.6F)
             .effect(() -> new MobEffectInstance(ModEffects.COMFORT.get(), 3600, 0),1.0F)
-            .effect(() -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 600,0),1.0F)
             .build();
     public static final Item.Properties PROPERTIES = new Item.Properties()
             .tab(ModCreativeTab.MOD_TAB)

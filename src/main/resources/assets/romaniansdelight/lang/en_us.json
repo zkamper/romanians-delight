@@ -11,8 +11,13 @@
   "item.romaniansdelight.salad_boeuf": "Salad d'Boeuf",
   "item.romaniansdelight.mayonnaise": "Mayonnaise",
   "item.romaniansdelight.sarmale": "Sarma",
+  "item.romaniansdelight.boiled_corn": "Boiled Corn",
+  "item.romaniansdelight.boiled_egg": "Boiled Egg",
+  "item.romaniansdelight.garlic": "Garlic",
+  "item.romaniansdelight.garlic_crate": "Garlic Crate",
 
+  "block.romaniansdelight.garlic": "Garlic Crop",
   "block.romaniansdelight.grill": "Grill",
-  "block.romaniansdelight.mamaliga": "Polenta"
-
+  "block.romaniansdelight.mamaliga": "Polenta",
+  "block.romaniansdelight.garlic_crate": "Garlic Crate"
 }

@@ -1,0 +1,14 @@
+{
+  "type": "farmersdelight:cooking",
+  "cookingtime": 100,
+  "experience": 0.5,
+  "ingredients": [
+    {
+      "item": "minecraft:egg"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "item": "romaniansdelight:boiled_egg"
+  }
+}
