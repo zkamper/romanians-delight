@@ -1,10 +1,13 @@
 package zkamper.romaniansdelight.registry;
 
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import vectorwing.farmersdelight.common.item.ConsumableItem;
+import vectorwing.farmersdelight.common.item.DrinkableItem;
 import zkamper.romaniansdelight.RomaniansDelight;
 import zkamper.romaniansdelight.common.item.*;
 
@@ -25,17 +28,48 @@ public class ModItems {
     public static final RegistryObject<Item> GARLIC;
 
     static {
-        RADAUTI_CIORBA = ITEMS.register(RadautiSoupItem.NAME, RadautiSoupItem::new);
-        STOMACH_CIORBA = ITEMS.register(TripeSoupItem.NAME, TripeSoupItem::new);
-        MAYONNAISE = ITEMS.register(MayonnaiseItem.NAME, MayonnaiseItem::new);
-        SALAD_BOEUF = ITEMS.register(SaladBoeufItem.NAME, SaladBoeufItem::new);
-        RAW_MICI = ITEMS.register(RawMiciItem.NAME, RawMiciItem::new);
-        COOKED_MICI = ITEMS.register(CookedMiciItem.NAME, CookedMiciItem::new);
-        CORN_FLOUR = ITEMS.register(CornFlourItem.NAME, CornFlourItem::new);
-        MAMALIGA = ITEMS.register(MamaligaItem.NAME, MamaligaItem::new);
-        SARMALE = ITEMS.register(SarmaleItem.NAME, SarmaleItem::new);
-        BOILED_CORN = ITEMS.register(BoiledCornItem.NAME, BoiledCornItem::new);
-        BOILED_EGG = ITEMS.register(BoiledEggItem.NAME, BoiledEggItem::new);
+        RADAUTI_CIORBA = ITEMS.register("radauti_soup", () -> new ConsumableItem(new Item.Properties()
+                .tab(ModCreativeTab.MOD_TAB)
+                .food(FoodValues.RADAUTI_SOUP)
+                .stacksTo(16)
+                .craftRemainder(Items.BOWL),true));
+        STOMACH_CIORBA = ITEMS.register("tripe_soup", () -> new ConsumableItem(new Item.Properties()
+                .tab(ModCreativeTab.MOD_TAB)
+                .food(FoodValues.TRIPE_SOUP)
+                .stacksTo(16)
+                .craftRemainder(Items.BOWL),true));
+        SALAD_BOEUF = ITEMS.register("salad_boeuf", () -> new ConsumableItem(new Item.Properties()
+                .tab(ModCreativeTab.MOD_TAB)
+                .food(FoodValues.SALAD_BOEUF)
+                .stacksTo(16)
+                .craftRemainder(Items.BOWL),true));
+        MAYONNAISE = ITEMS.register("mayonnaise", () -> new DrinkableItem(new Item.Properties()
+                .tab(ModCreativeTab.MOD_TAB)
+                .food(FoodValues.MAYONNAISE)
+                .stacksTo(16)));
+        SARMALE = ITEMS.register("sarmale", () -> new ConsumableItem(new Item.Properties()
+                .tab(ModCreativeTab.MOD_TAB)
+                .food(FoodValues.SARMALE)
+                .stacksTo(64),true));
+        RAW_MICI = ITEMS.register("raw_mici", () -> new Item(new Item.Properties()
+                .food(FoodValues.RAW_MICI)
+                .tab(ModCreativeTab.MOD_TAB)));
+        COOKED_MICI = ITEMS.register("cooked_mici", () -> new Item(new Item.Properties()
+                .food(FoodValues.COOKED_MICI)
+                .tab(ModCreativeTab.MOD_TAB)));
+        CORN_FLOUR = ITEMS.register("corn_flour", () -> new Item(new Item.Properties()
+                .tab(ModCreativeTab.MOD_TAB)));
+        MAMALIGA = ITEMS.register("mamaliga", () -> new Item(new Item.Properties()
+                .food(FoodValues.MAMALIGA)
+                .tab(ModCreativeTab.MOD_TAB)));
+        BOILED_CORN = ITEMS.register("boiled_corn", () -> new Item(new Item.Properties()
+                .food(FoodValues.BOILED_CORN)
+                .tab(ModCreativeTab.MOD_TAB)));
+        BOILED_EGG = ITEMS.register("boiled_egg", () -> new Item(new Item.Properties()
+                .food(FoodValues.BOILED_EGG)
+                .tab(ModCreativeTab.MOD_TAB)));
+
+        // Special items
         GARLIC = ITEMS.register(GarlicItem.NAME, GarlicItem::new);
     }
 
