@@ -26,6 +26,8 @@ public class ModItems {
     public static final RegistryObject<Item> BOILED_CORN;
     public static final RegistryObject<Item> BOILED_EGG;
     public static final RegistryObject<Item> GARLIC;
+    public static final RegistryObject<Item> RAW_POTATOES;
+    public static final RegistryObject<Item> FRIED_POTATOES;
 
     static {
         RADAUTI_CIORBA = ITEMS.register("radauti_soup", () -> new ConsumableItem(new Item.Properties()
@@ -59,7 +61,7 @@ public class ModItems {
                 .tab(ModCreativeTab.MOD_TAB)));
         CORN_FLOUR = ITEMS.register("corn_flour", () -> new Item(new Item.Properties()
                 .tab(ModCreativeTab.MOD_TAB)));
-        MAMALIGA = ITEMS.register("mamaliga", () -> new Item(new Item.Properties()
+        MAMALIGA = ITEMS.register("mamaliga_serving", () -> new Item(new Item.Properties()
                 .food(FoodValues.MAMALIGA)
                 .tab(ModCreativeTab.MOD_TAB)));
         BOILED_CORN = ITEMS.register("boiled_corn", () -> new Item(new Item.Properties()
@@ -67,6 +69,12 @@ public class ModItems {
                 .tab(ModCreativeTab.MOD_TAB)));
         BOILED_EGG = ITEMS.register("boiled_egg", () -> new Item(new Item.Properties()
                 .food(FoodValues.BOILED_EGG)
+                .tab(ModCreativeTab.MOD_TAB)));
+        RAW_POTATOES = ITEMS.register("raw_potatoes", () -> new Item(new Item.Properties()
+                .food(FoodValues.RAW_POTATOES)
+                .tab(ModCreativeTab.MOD_TAB)));
+        FRIED_POTATOES = ITEMS.register("fried_potatoes", () -> new Item(new Item.Properties()
+                .food(FoodValues.FRIED_POTATOES)
                 .tab(ModCreativeTab.MOD_TAB)));
 
         // Special items

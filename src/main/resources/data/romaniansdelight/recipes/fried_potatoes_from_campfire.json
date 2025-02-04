@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "cookingtime": 250,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "romaniansdelight:raw_potatoes"
+  },
+  "result": "romaniansdelight:fried_potatoes"
+}
