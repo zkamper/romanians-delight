@@ -2,6 +2,7 @@ package zkamper.romaniansdelight.common.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -9,19 +10,23 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.*;
+import net.minecraft.world.Clearable;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.Containers;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import vectorwing.farmersdelight.common.registry.ModSounds;
-import zkamper.romaniansdelight.registry.ModBlockEntities;
 import zkamper.romaniansdelight.common.block.GrillBlock;
+import zkamper.romaniansdelight.registry.ModBlockEntities;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
@@ -31,7 +36,7 @@ public class GrillBlockEntity extends BlockEntity implements Clearable {
     private final NonNullList<ItemStack> items;
     private final int[] cookingProgress;
     private final int[] cookingTime;
-    private final RecipeManager.CachedCheck<Container, CampfireCookingRecipe> quickCheck;
+    private final RecipeManager.CachedCheck<SingleRecipeInput, CampfireCookingRecipe> quickCheck;
 
     public GrillBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.GRILL.get(), blockPos, blockState);
@@ -49,28 +54,25 @@ public class GrillBlockEntity extends BlockEntity implements Clearable {
             if (!itemStack.isEmpty()) {
                 ok = true;
                 grillBlockEntity.cookingProgress[idx]++;
-                // If it rains, cook slower
-                if(level.isRainingAt(blockPos) && level.canSeeSky(blockPos) && randomSource.nextFloat() < 0.5F) {
+                if (level.isRainingAt(blockPos) && level.canSeeSky(blockPos) && randomSource.nextFloat() < 0.5F) {
                     grillBlockEntity.cookingProgress[idx]--;
                 }
                 if (grillBlockEntity.cookingProgress[idx] >= grillBlockEntity.cookingTime[idx]) {
-                    Container simpleContainer = new SimpleContainer(itemStack);
-                    ItemStack itemStack1 = grillBlockEntity.quickCheck
-                            .getRecipeFor(simpleContainer, level)
-                            .map((cookingRecipe) -> cookingRecipe.assemble(simpleContainer))
+                    SingleRecipeInput input = new SingleRecipeInput(itemStack);
+                    ItemStack result = grillBlockEntity.quickCheck
+                            .getRecipeFor(input, level)
+                            .map(holder -> holder.value().assemble(input, level.registryAccess()))
                             .orElse(itemStack);
-                    Containers.dropItemStack(level, blockPos.getX(), blockPos.getY(), blockPos.getZ(), itemStack1);
+                    Containers.dropItemStack(level, blockPos.getX(), blockPos.getY(), blockPos.getZ(), result);
                     grillBlockEntity.items.set(idx, ItemStack.EMPTY);
                     level.sendBlockUpdated(blockPos, blockState, blockState, 3);
                     level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(blockState));
                 }
             }
         }
-
         if (ok) {
             setChanged(level, blockPos, blockState);
         }
-
     }
 
     public static void particleTick(Level level, BlockPos blockPos, BlockState blockState, GrillBlockEntity grillBlockEntity) {
@@ -91,7 +93,7 @@ public class GrillBlockEntity extends BlockEntity implements Clearable {
                 double xPos = (double) blockPos.getX() + 0.5 - (double) ((float) direction1.getStepX() * 0.3125F) + (double) ((float) direction1.getClockWise().getStepX() * 0.3125F);
                 double yPos = (double) blockPos.getY() + 1.1;
                 double zPos = (double) blockPos.getZ() + 0.5 - (double) ((float) direction1.getStepZ() * 0.3125F) + (double) ((float) direction1.getClockWise().getStepZ() * 0.3125F);
-                if(rand < 0.005F && itemIndex == 0) {
+                if (rand < 0.005F && itemIndex == 0) {
                     level.playLocalSound(blockPos.getX(), blockPos.getY(), blockPos.getZ(), (SoundEvent) ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundSource.BLOCKS, 0.4F, randomSource.nextFloat() * 0.2F + 0.5F, false);
                 }
                 for (int idx = 0; idx < 4; ++idx) {
@@ -99,54 +101,54 @@ public class GrillBlockEntity extends BlockEntity implements Clearable {
                 }
             }
         }
-
     }
 
     public NonNullList<ItemStack> getItems() {
         return this.items;
     }
 
-    public void load(CompoundTag compoundTag) {
-        super.load(compoundTag);
+    @Override
+    protected void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider registries) {
+        super.loadAdditional(compoundTag, registries);
         this.items.clear();
-        ContainerHelper.loadAllItems(compoundTag, this.items);
+        ContainerHelper.loadAllItems(compoundTag, this.items, registries);
         int[] cookingTimesArr;
         if (compoundTag.contains("CookingTimes", 11)) {
             cookingTimesArr = compoundTag.getIntArray("CookingTimes");
             System.arraycopy(cookingTimesArr, 0, this.cookingProgress, 0, Math.min(this.cookingTime.length, cookingTimesArr.length));
         }
-
         if (compoundTag.contains("CookingTotalTimes", 11)) {
             cookingTimesArr = compoundTag.getIntArray("CookingTotalTimes");
             System.arraycopy(cookingTimesArr, 0, this.cookingTime, 0, Math.min(this.cookingTime.length, cookingTimesArr.length));
         }
-
     }
 
-    protected void saveAdditional(CompoundTag compoundTag) {
-        super.saveAdditional(compoundTag);
-        ContainerHelper.saveAllItems(compoundTag, this.items, true);
+    @Override
+    protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider registries) {
+        super.saveAdditional(compoundTag, registries);
+        ContainerHelper.saveAllItems(compoundTag, this.items, true, registries);
         compoundTag.putIntArray("CookingTimes", this.cookingProgress);
         compoundTag.putIntArray("CookingTotalTimes", this.cookingTime);
     }
 
+    @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
-    public CompoundTag getUpdateTag() {
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
         CompoundTag compoundTag = new CompoundTag();
-        ContainerHelper.saveAllItems(compoundTag, this.items, true);
+        ContainerHelper.saveAllItems(compoundTag, this.items, true, registries);
         return compoundTag;
     }
 
-    public Optional<CampfireCookingRecipe> getCookableRecipe(ItemStack itemStack) {
+    public Optional<RecipeHolder<CampfireCookingRecipe>> getCookableRecipe(ItemStack itemStack) {
         if (this.items.stream().noneMatch(ItemStack::isEmpty)) {
             return Optional.empty();
-        } else {
-            assert this.level != null;
-            return this.quickCheck.getRecipeFor(new SimpleContainer(itemStack), this.level);
         }
+        assert this.level != null;
+        return this.quickCheck.getRecipeFor(new SingleRecipeInput(itemStack), this.level);
     }
 
     public boolean placeFood(@Nullable Entity entity, ItemStack itemStack, int cookingTime) {
@@ -161,7 +163,6 @@ public class GrillBlockEntity extends BlockEntity implements Clearable {
                 return true;
             }
         }
-
         return false;
     }
 
@@ -169,8 +170,9 @@ public class GrillBlockEntity extends BlockEntity implements Clearable {
         this.setChanged();
         Objects.requireNonNull(this.getLevel()).sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
     }
+
+    @Override
     public void clearContent() {
         this.items.clear();
     }
-
 }

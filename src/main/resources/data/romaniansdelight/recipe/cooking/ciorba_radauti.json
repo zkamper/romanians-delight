@@ -3,11 +3,12 @@
   "cookingtime": 200,
   "experience": 1.0,
   "container": {
-    "item": "minecraft:bowl"
+    "count": 1,
+    "id": "minecraft:bowl"
   },
   "ingredients": [
     {
-      "tag": "forge:raw_chicken"
+      "tag": "c:foods/raw_chicken"
     },
     {
       "item": "farmersdelight:onion"
@@ -27,6 +28,7 @@
   ],
   "recipe_book_tab": "meals",
   "result": {
-    "item": "romaniansdelight:radauti_soup"
+    "count": 1,
+    "id": "romaniansdelight:radauti_soup"
   }
 }

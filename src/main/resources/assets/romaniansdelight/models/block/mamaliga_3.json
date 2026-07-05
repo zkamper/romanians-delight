@@ -6,7 +6,7 @@
 		"3": "romaniansdelight:block/mamaliga_top",
 		"4": "romaniansdelight:block/mamaliga_inner",
 		"particle": "romaniansdelight:block/mamaliga_side",
-		"tray_top": "farmersdelight:block/tray_top",
+		"tray_top": "farmersdelight:block/tray",
 		"tray_side": "farmersdelight:block/tray_bottom"
 	},
 	"elements": [

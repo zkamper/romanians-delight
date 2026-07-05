@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"tray_top": "farmersdelight:block/tray_top",
+		"tray_top": "farmersdelight:block/tray",
 		"tray_side": "farmersdelight:block/tray_bottom",
 		"particle": "romaniansdelight:block/mamaliga_side"
 	},

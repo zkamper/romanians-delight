@@ -3,12 +3,9 @@
   "ingredients": [
     {
       "item": "minecraft:egg"
-    },
-    {
-      "tag": "forge:fruits/lemon"
     }
   ],
   "result": {
-    "item": "romaniansdelight:mayonnaise"
+    "id": "romaniansdelight:mayonnaise"
   }
 }

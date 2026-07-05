@@ -2,15 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "item": "farmersdelight:minced_beef"
+      "item": "romaniansdelight:garlic_crate"
     }
   },
   "pattern": [
-    "#",
     "#"
   ],
   "result": {
-    "item": "romaniansdelight:raw_mici",
-    "count": 2
+    "id": "romaniansdelight:garlic",
+    "count": 9
   }
 }

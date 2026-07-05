@@ -8,7 +8,7 @@
       "item": "minecraft:baked_potato"
     },
     {
-      "tag": "forge:cooked_chicken"
+      "tag": "c:foods/cooked_chicken"
     },
     {
       "item": "romaniansdelight:mayonnaise"
@@ -24,6 +24,6 @@
     }
   ],
   "result": {
-    "item": "romaniansdelight:salad_boeuf"
+    "id": "romaniansdelight:salad_boeuf"
   }
 }

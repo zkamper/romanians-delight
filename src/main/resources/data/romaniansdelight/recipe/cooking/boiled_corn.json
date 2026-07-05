@@ -4,11 +4,12 @@
   "experience": 0.5,
   "ingredients": [
     {
-      "item": "minecraft:egg"
+      "item": "culturaldelights:corn_cob"
     }
   ],
   "recipe_book_tab": "meals",
   "result": {
-    "item": "romaniansdelight:boiled_egg"
+    "count": 1,
+    "id": "romaniansdelight:boiled_corn"
   }
 }

@@ -3,7 +3,9 @@
   "cookingtime": 400,
   "experience": 0.35,
   "ingredient": {
-    "item": "romaniansdelight:raw_potatoes"
+    "item": "romaniansdelight:raw_mici"
   },
-  "result": "romaniansdelight:fried_potatoes"
+  "result": {
+    "id": "romaniansdelight:cooked_mici"
+  }
 }

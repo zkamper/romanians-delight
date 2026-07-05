@@ -5,5 +5,7 @@
   "ingredient": {
     "item": "romaniansdelight:raw_mici"
   },
-  "result": "romaniansdelight:cooked_mici"
+  "result": {
+    "id": "romaniansdelight:cooked_mici"
+  }
 }

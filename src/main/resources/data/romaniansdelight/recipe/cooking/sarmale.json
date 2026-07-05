@@ -4,7 +4,7 @@
   "experience": 0.35,
   "ingredients": [
     {
-      "tag": "forge:crops/cabbage"
+      "tag": "c:crops/cabbage"
     },
     {
       "item": "farmersdelight:onion"
@@ -13,11 +13,12 @@
       "item": "farmersdelight:rice"
     },
     {
-      "tag": "forge:raw_pork"
+      "tag": "c:foods/raw_pork"
     }
   ],
   "recipe_book_tab": "misc",
   "result": {
-    "item": "romaniansdelight:sarmale"
+    "count": 1,
+    "id": "romaniansdelight:sarmale"
   }
 }

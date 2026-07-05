@@ -1,5 +1,6 @@
 package zkamper.romaniansdelight.common.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -8,11 +9,12 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -24,28 +26,28 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.common.registry.ModParticleTypes;
-import zkamper.romaniansdelight.registry.ModBlockEntities;
 import zkamper.romaniansdelight.common.block.entity.GrillBlockEntity;
-
+import zkamper.romaniansdelight.registry.ModBlockEntities;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-public class  GrillBlock extends BaseEntityBlock {
+public class GrillBlock extends BaseEntityBlock {
+    public static final MapCodec<GrillBlock> CODEC = simpleCodec(p -> new GrillBlock());
+
     public static final String NAME = "grill";
     public static final DirectionProperty FACING;
     public static final VoxelShape SHAPE;
 
     public static final Properties PROPERTIES = BlockBehaviour.Properties
-            .of(Material.METAL)
+            .of()
             .strength(0.5F, 6.0F)
             .sound(SoundType.LANTERN)
             .lightLevel((state) -> 5)
@@ -53,61 +55,76 @@ public class  GrillBlock extends BaseEntityBlock {
 
     public GrillBlock() {
         super(PROPERTIES);
-        this.registerDefaultState(((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.NORTH));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult hitResult) {
+    @Override
+    public MapCodec<GrillBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack itemstack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult hitResult) {
         BlockEntity blockentity = level.getBlockEntity(blockPos);
         if (blockentity instanceof GrillBlockEntity grillBlockEntity) {
-            ItemStack itemstack = player.getItemInHand(interactionHand);
-            Optional<CampfireCookingRecipe> optional = grillBlockEntity.getCookableRecipe(itemstack);
+            Optional<RecipeHolder<CampfireCookingRecipe>> optional = grillBlockEntity.getCookableRecipe(itemstack);
             if (optional.isPresent()) {
-                if (!level.isClientSide && grillBlockEntity.placeFood(player, player.getAbilities().instabuild ? itemstack.copy() : itemstack, optional.get().getCookingTime())) {
+                if (!level.isClientSide && grillBlockEntity.placeFood(player, player.getAbilities().instabuild ? itemstack.copy() : itemstack, optional.get().value().getCookingTime())) {
                     player.awardStat(Stats.INTERACT_WITH_CAMPFIRE);
-                    return InteractionResult.SUCCESS;
+                    return ItemInteractionResult.SUCCESS;
                 }
-
-                return InteractionResult.CONSUME;
+                return ItemInteractionResult.CONSUME;
             }
         }
-
-        return InteractionResult.PASS;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
+    @Override
     public VoxelShape getShape(BlockState p_51309_, BlockGetter p_51310_, BlockPos p_51311_, CollisionContext p_51312_) {
         return SHAPE;
     }
 
+    @Override
     public RenderShape getRenderShape(BlockState blockState) {
         return RenderShape.MODEL;
     }
 
+    @Override
     public void onRemove(BlockState blockState, Level level, BlockPos blockPos, BlockState blockStateNew, boolean p_51285_) {
         if (!blockState.is(blockStateNew.getBlock())) {
             BlockEntity blockentity = level.getBlockEntity(blockPos);
             if (blockentity instanceof GrillBlockEntity) {
-                Containers.dropContents(level, blockPos, ((GrillBlockEntity)blockentity).getItems());
+                Containers.dropContents(level, blockPos, ((GrillBlockEntity) blockentity).getItems());
             }
-
             super.onRemove(blockState, level, blockPos, blockStateNew, p_51285_);
         }
-
     }
+
     public static void makeParticles(Level level, BlockPos blockPos, boolean cooking) {
         RandomSource randSource = level.getRandom();
         SimpleParticleType particleType = ModParticleTypes.STEAM.get();
-        level.addAlwaysVisibleParticle(particleType, true, (double)blockPos.getX() + 0.5 + randSource.nextDouble() / 3.0 * (double)(randSource.nextBoolean() ? 1 : -1), (double)blockPos.getY() + 1.1 + randSource.nextDouble() + randSource.nextDouble(), (double)blockPos.getZ() + 0.5 + randSource.nextDouble() / 3.0 * (double)(randSource.nextBoolean() ? 1 : -1), 0.0, 0.07, 0.0);
+        level.addAlwaysVisibleParticle(particleType, true,
+                (double) blockPos.getX() + 0.5 + randSource.nextDouble() / 3.0 * (double) (randSource.nextBoolean() ? 1 : -1),
+                (double) blockPos.getY() + 1.1 + randSource.nextDouble() + randSource.nextDouble(),
+                (double) blockPos.getZ() + 0.5 + randSource.nextDouble() / 3.0 * (double) (randSource.nextBoolean() ? 1 : -1),
+                0.0, 0.07, 0.0);
         if (cooking) {
-            level.addParticle(ParticleTypes.SMOKE, (double)blockPos.getX() + 0.5 + randSource.nextDouble() / 4.0 * (double)(randSource.nextBoolean() ? 1 : -1), (double)blockPos.getY() + 0.4, (double)blockPos.getZ() + 0.5 + randSource.nextDouble() / 4.0 * (double)(randSource.nextBoolean() ? 1 : -1), 0.0, 0.005, 0.0);
+            level.addParticle(ParticleTypes.SMOKE,
+                    (double) blockPos.getX() + 0.5 + randSource.nextDouble() / 4.0 * (double) (randSource.nextBoolean() ? 1 : -1),
+                    (double) blockPos.getY() + 0.4,
+                    (double) blockPos.getZ() + 0.5 + randSource.nextDouble() / 4.0 * (double) (randSource.nextBoolean() ? 1 : -1),
+                    0.0, 0.005, 0.0);
         }
     }
 
     @Nullable
+    @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         return this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite());
     }
 
     @Nullable
+    @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_153212_, BlockState blockState, BlockEntityType<T> blockEntityType) {
         if (p_153212_.isClientSide) {
             return createTickerHelper(blockEntityType, ModBlockEntities.GRILL.get(), GrillBlockEntity::particleTick);
@@ -116,18 +133,22 @@ public class  GrillBlock extends BaseEntityBlock {
         }
     }
 
+    @Override
     public BlockState rotate(BlockState state, Rotation rot) {
         return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
+    @Override
     public BlockState mirror(BlockState state, Mirror mirror) {
         return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING);
     }
 
+    @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
         return new GrillBlockEntity(blockPos, blockState);
     }

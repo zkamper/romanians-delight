@@ -1,15 +1,15 @@
 package zkamper.romaniansdelight;
 
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import zkamper.romaniansdelight.registry.ModBlockEntities;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import zkamper.romaniansdelight.common.block.renderer.GrillRenderer;
+import zkamper.romaniansdelight.registry.ModBlockEntities;
 
-@Mod.EventBusSubscriber(
+@EventBusSubscriber(
         modid = RomaniansDelight.MOD_ID,
-        bus = Mod.EventBusSubscriber.Bus.MOD,
+        bus = EventBusSubscriber.Bus.MOD,
         value = {Dist.CLIENT}
 )
 public class ClientSetupEvents {

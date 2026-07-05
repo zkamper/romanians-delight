@@ -1,13 +1,14 @@
 {
   "type": "farmersdelight:cooking",
   "container": {
-    "item": "minecraft:bowl"
+    "count": 1,
+    "id": "minecraft:bowl"
   },
   "cookingtime": 100,
   "experience": 1.0,
   "ingredients": [
     {
-      "tag": "forge:milk"
+      "item": "minecraft:milk_bucket"
     },
     {
       "item": "romaniansdelight:corn_flour"
@@ -21,6 +22,7 @@
   ],
   "recipe_book_tab": "meals",
   "result": {
-    "item": "romaniansdelight:mamaliga"
+    "count": 1,
+    "id": "romaniansdelight:mamaliga"
   }
 }

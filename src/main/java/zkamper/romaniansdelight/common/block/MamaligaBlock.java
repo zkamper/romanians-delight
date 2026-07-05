@@ -1,5 +1,6 @@
 package zkamper.romaniansdelight.common.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -16,13 +17,19 @@ import zkamper.romaniansdelight.registry.ModItems;
 
 
 public class MamaligaBlock extends FeastBlock {
+    public static final MapCodec<MamaligaBlock> CODEC = simpleCodec(p -> new MamaligaBlock());
     public static final String NAME = "mamaliga";
     protected static final VoxelShape PLATE_SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 2.0, 15.0);
     protected static final VoxelShape PIE_SHAPE;
     public static final IntegerProperty MAMALIGA_SERVINGS = IntegerProperty.create("servings", 0, 6);
-    public static final Properties PROPERTIES = Block.Properties.copy(Blocks.CAKE);
+    public static final Properties PROPERTIES = Block.Properties.ofFullCopy(Blocks.CAKE);
     public MamaligaBlock() {
         super(PROPERTIES, ModItems.MAMALIGA, true);
+    }
+
+    @Override
+    public MapCodec<MamaligaBlock> codec() {
+        return CODEC;
     }
 
     public IntegerProperty getServingsProperty() {

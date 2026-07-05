@@ -4,7 +4,7 @@
 	"textures": {
 		"2": "romaniansdelight:block/mamaliga_side",
 		"3": "romaniansdelight:block/mamaliga_top",
-		"tray_top": "farmersdelight:block/tray_top",
+		"tray_top": "farmersdelight:block/tray",
 		"tray_side": "farmersdelight:block/tray_bottom",
 		"particle": "romaniansdelight:block/mamaliga_side"
 	},

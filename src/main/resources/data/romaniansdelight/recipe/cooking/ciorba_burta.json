@@ -3,7 +3,8 @@
   "cookingtime": 200,
   "experience": 1.0,
   "container": {
-    "item": "minecraft:bowl"
+    "count": 1,
+    "id": "minecraft:bowl"
   },
   "ingredients": [
     {
@@ -24,6 +25,7 @@
   ],
   "recipe_book_tab": "meals",
   "result": {
-    "item": "romaniansdelight:tripe_soup"
+    "count": 1,
+    "id": "romaniansdelight:tripe_soup"
   }
 }

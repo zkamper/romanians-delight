@@ -1,9 +1,11 @@
 {
-  "type": "minecraft:smelting",
+  "type": "minecraft:smoking",
   "cookingtime": 400,
   "experience": 0.35,
   "ingredient": {
     "item": "romaniansdelight:raw_mici"
   },
-  "result": "romaniansdelight:cooked_mici"
+  "result": {
+    "id": "romaniansdelight:cooked_mici"
+  }
 }
